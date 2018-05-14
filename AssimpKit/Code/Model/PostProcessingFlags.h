@@ -38,7 +38,7 @@
 
  The following presets can also be used for post processing:
 
- <hr></hr>
+ <hr>
 
  <b>AssimpKit_ProcessPreset_TargetRealtimeUse_Fast</b> - Default postprocess
  configuration optimizing the data for real-time rendering.
@@ -46,7 +46,7 @@
  Applications would want to use this preset to load models on end-user PCs,
  maybe for direct use in game.
 
- <hr></hr>
+ <hr>
 
  <b>AssimpKit_ProcessPreset_TargetRealtime_Quality</b> - Default postprocess
  configuration optimizing the data for real-time rendering.
@@ -56,7 +56,7 @@
  could be a good choice for a level editor environment where import speed is not
  so important.
 
- <hr></hr>
+ <hr>
 
  <b>AssimpKit_ProcessPreset_TargetRealtime_MaxQuality</b> - Default postprocess
  configuration optimizing the data for real-time rendering.
@@ -65,7 +65,7 @@
  optimized data. It's your choice for level editor environments where import
  speed is not important.
 
- <hr></hr>
+ <hr>
 
  <b>Note</b>: All the flags and presets are copied and renamed from Assimp's
  postprocess.h
@@ -312,7 +312,7 @@ typedef NS_OPTIONS(unsigned int, AssimpKitPostProcessSteps) {
      * To have the degenerate stuff not only detected and collapsed but
      * removed, try one of the following procedures:
      * <br><b>1.</b> (if you support lines and points for rendering but don't
-     *    want the degenerates)</br>
+     *    want the degenerates)<br>
      * <ul>
      *   <li>Specify the AssimpKit_Process_FindDegenerates flag.
      *   </li>
@@ -322,7 +322,7 @@ typedef NS_OPTIONS(unsigned int, AssimpKitPostProcessSteps) {
      *       pipeline steps.
      *   </li>
      * </ul>
-     * <br><b>2.</b>(if you don't support lines and points at all)</br>
+     * <br><b>2.</b>(if you don't support lines and points at all)<br>
      * <ul>
      *   <li>Specify the AssimpKit_Process_FindDegenerates flag.
      *   </li>
