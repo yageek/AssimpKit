@@ -37,11 +37,11 @@
 #import "ModelsTableViewController.h"
 @import AssimpKit;
 #import "AnimationsTableViewController.h"
+#import "iOS_Example-Swift.h"
 
 @interface ModelsTableViewController ()
 
-@property (readwrite, nonatomic) NSArray *modelFiles;
-@property (readwrite, nonatomic) NSString *docsDir;
+@property (nonatomic, strong) ModelsController *controller;
 
 @end
 
@@ -51,20 +51,7 @@
 {
     [super viewDidLoad];
 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask, YES);
-    NSString *docsDir = [paths objectAtIndex:0];
-    self.docsDir = [docsDir stringByAppendingString:@"/"];
-    NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:docsDir];
-    NSMutableArray *modelFiles = [[NSMutableArray alloc] init];
-    for (NSString *file in files)
-    {
-        if ([SCNScene canImportFileExtension:file.pathExtension])
-        {
-            [modelFiles addObject:file];
-        }
-    }
-    self.modelFiles = modelFiles;
+    self.controller = [[ModelsController alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,7 +70,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
     numberOfRowsInSection:(NSInteger)section
 {
-    return self.modelFiles.count;
+    return self.controller.modelFiles.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -94,7 +81,7 @@
                                         forIndexPath:indexPath];
 
     // Configure the cell...
-    cell.textLabel.text = [self.modelFiles objectAtIndex:indexPath.row];
+    cell.textLabel.text = [self.controller.modelFiles objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -106,13 +93,10 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     AnimationsTableViewController *animsVC =
         (AnimationsTableViewController *)segue.destinationViewController;
-    animsVC.modelFiles = self.modelFiles;
-    animsVC.docsDir = self.docsDir;
+    animsVC.controller = self.controller;
     if ([segue.identifier isEqualToString:@"showAnimsSegue_ID"])
     {
-        animsVC.modelFilePath = [self.docsDir
-            stringByAppendingString:[self.modelFiles
-                                        objectAtIndex:indexPath.row]];
+        self.controller.currentModelPath = [self.controller filePathAt:indexPath.row];
     }
 }
 

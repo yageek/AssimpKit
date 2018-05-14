@@ -19,6 +19,8 @@
 		77CDAB4A1DD7421500B7E342 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAB481DD7421500B7E342 /* Main.storyboard */; };
 		77CDAB4C1DD7421500B7E342 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAB4B1DD7421500B7E342 /* Assets.xcassets */; };
 		77CDAB4F1DD7421600B7E342 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77CDAB4D1DD7421600B7E342 /* LaunchScreen.storyboard */; };
+		BB1EB45C20A9E54400E6BA31 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = BB1EB45B20A9E54300E6BA31 /* assets */; };
+		BB1EB45F20AA099700E6BA31 /* ModelsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1EB45E20AA099700E6BA31 /* ModelsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +55,9 @@
 		77CDAB4B1DD7421500B7E342 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77CDAB4E1DD7421600B7E342 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77CDAB501DD7421600B7E342 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB1EB45B20A9E54300E6BA31 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = ../../../assets; sourceTree = "<group>"; };
+		BB1EB45D20AA099700E6BA31 /* iOS-Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS-Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		BB1EB45E20AA099700E6BA31 /* ModelsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +105,11 @@
 				77CDAB3D1DD7421500B7E342 /* Supporting Files */,
 				7746DB661DEEF1AC00C651DC /* ModelsTableViewController.h */,
 				7746DB671DEEF1AC00C651DC /* ModelsTableViewController.m */,
+				BB1EB45E20AA099700E6BA31 /* ModelsController.swift */,
 				7746DB781DEF32F600C651DC /* AnimationsTableViewController.h */,
 				7746DB791DEF32F600C651DC /* AnimationsTableViewController.m */,
+				BB1EB45B20A9E54300E6BA31 /* assets */,
+				BB1EB45D20AA099700E6BA31 /* iOS-Example-Bridging-Header.h */,
 			);
 			path = "iOS-Example";
 			sourceTree = "<group>";
@@ -155,6 +163,7 @@
 					77CDAB391DD7421500B7E342 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = PRJ5CHFB5D;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -185,6 +194,7 @@
 				77CDAB441DD7421500B7E342 /* art.scnassets in Resources */,
 				77CDAB4F1DD7421600B7E342 /* LaunchScreen.storyboard in Resources */,
 				77CDAB4C1DD7421500B7E342 /* Assets.xcassets in Resources */,
+				BB1EB45C20A9E54400E6BA31 /* assets in Resources */,
 				7746DB821DEF3C2000C651DC /* navbar-bg.png in Resources */,
 				77CDAB4A1DD7421500B7E342 /* Main.storyboard in Resources */,
 			);
@@ -200,6 +210,7 @@
 				77CDAB421DD7421500B7E342 /* AppDelegate.m in Sources */,
 				7746DB681DEEF1AC00C651DC /* ModelsTableViewController.m in Sources */,
 				77CDAB471DD7421500B7E342 /* GameViewController.m in Sources */,
+				BB1EB45F20AA099700E6BA31 /* ModelsController.swift in Sources */,
 				7746DB7A1DEF32F600C651DC /* AnimationsTableViewController.m in Sources */,
 				77CDAB3F1DD7421500B7E342 /* main.m in Sources */,
 			);
@@ -326,6 +337,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				CLANG_ENABLE_MODULES = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "iOS-Example/Info.plist";
@@ -335,6 +347,9 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isonapps.iOSExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iOS-Example/iOS-Example-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -344,6 +359,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = PRJ5CHFB5D;
+				CLANG_ENABLE_MODULES = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "iOS-Example/Info.plist";
@@ -353,6 +369,8 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.isonapps.iOSExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iOS-Example/iOS-Example-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

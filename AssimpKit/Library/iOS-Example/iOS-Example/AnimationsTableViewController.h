@@ -34,11 +34,10 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "iOS_Example-Swift.h"
 
 @interface AnimationsTableViewController : UITableViewController
 
-@property(readwrite, nonatomic) NSString* modelFilePath;
-@property (readwrite, nonatomic) NSArray *modelFiles;
-@property (readwrite, nonatomic) NSString *docsDir;
+@property (nonatomic, strong) ModelsController *controller;
 
 @end

@@ -63,7 +63,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
     numberOfRowsInSection:(NSInteger)section
 {
-    return self.modelFiles.count;
+    return self.controller.modelFiles.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -74,7 +74,7 @@
                                         forIndexPath:indexPath];
 
     // Configure the cell...
-    cell.textLabel.text = [self.modelFiles objectAtIndex:indexPath.row];
+    cell.textLabel.text = [self.controller.modelFiles objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -87,14 +87,14 @@
     (GameViewController *)segue.destinationViewController;
     if ([segue.identifier isEqualToString:@"playAnimSegue_ID"])
     {
-        NSString *animFilePath = [self.docsDir
-            stringByAppendingString:[self.modelFiles
+        NSString *animFilePath = [self.controller.docsDir
+            stringByAppendingString:[self.controller.modelFiles
                                         objectAtIndex:indexPath.row]];
         gameVC.animFilePath = animFilePath;
 
-        if (self.modelFilePath)
+        if (self.controller.currentModelPath)
         {
-            gameVC.modelFilePath = self.modelFilePath;
+            gameVC.modelFilePath = self.controller.currentModelPath;
         }
         else {
             gameVC.modelFilePath = animFilePath;
@@ -102,7 +102,7 @@
     }
     if ([segue.identifier isEqualToString:@"viewModelSegue_ID"])
     {
-        gameVC.modelFilePath = self.modelFilePath;
+        gameVC.modelFilePath = self.controller.currentModelPath;
     }
 }
 
