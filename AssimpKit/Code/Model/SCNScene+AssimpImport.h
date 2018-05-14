@@ -38,6 +38,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #import "SCNAssimpScene.h"
 #import "PostProcessingFlags.h"
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  A scenekit SCNScene category to import scenes using the assimp library.
  */
@@ -54,7 +55,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   @return The array of supported file extensions
 */
-+ (NSArray<NSString *> *)allowedFileExtensions;
++ (nullable NSArray<NSString *> *)allowedFileExtensions;
 /**
  Returns a Boolean value that indicates whether the SCNAssimpScene class can
  read asset data from files with the specified extension.
@@ -72,7 +73,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  @param postProcessFlags The flags for all possible post processing steps.
  @return A new scene object, or nil if no scene could be loaded.
  */
-+ (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
++ (nullable SCNAssimpScene *)assimpSceneNamed:(NSString *)name
                     postProcessFlags:
                         (AssimpKitPostProcessSteps)postProcessFlags
 DEPRECATED_MSG_ATTRIBUTE("Please use assimpSceneNamed:postProcessFlags:error:");
@@ -85,7 +86,7 @@ DEPRECATED_MSG_ATTRIBUTE("Please use assimpSceneNamed:postProcessFlags:error:");
  @param error Scene loading error.
  @return A new scene object, or nil if no scene could be loaded.
  */
-+ (SCNAssimpScene *)assimpSceneNamed:(NSString *)name
++ (nullable SCNAssimpScene *)assimpSceneNamed:(NSString *)name
                     postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
                                error:(NSError **)error;
 
@@ -96,7 +97,7 @@ DEPRECATED_MSG_ATTRIBUTE("Please use assimpSceneNamed:postProcessFlags:error:");
  @param postProcessFlags The flags for all possible post processing steps.
  @return A new scene object, or nil if no scene could be loaded.
  */
-+ (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
++ (nullable SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
                     postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
 DEPRECATED_MSG_ATTRIBUTE(
 "Please use assimpSceneWithURL:postProcessFlags:error:");
@@ -110,9 +111,10 @@ DEPRECATED_MSG_ATTRIBUTE(
  @param error Scene loading error.
  @return A new scene object, or nil if no scene could be loaded.
  */
-+ (SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
++ (nullable SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
                       postProcessFlags:
                           (AssimpKitPostProcessSteps)postProcessFlags
                                  error:(NSError **)error;
 
 @end
+NS_ASSUME_NONNULL_END
