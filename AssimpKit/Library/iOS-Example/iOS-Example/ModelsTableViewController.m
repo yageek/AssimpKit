@@ -35,8 +35,7 @@
  */
 
 #import "ModelsTableViewController.h"
-#import <AssimpKit/PostProcessingFlags.h>
-#import <AssimpKit/SCNScene+AssimpImport.h>
+@import AssimpKit;
 #import "AnimationsTableViewController.h"
 
 @interface ModelsTableViewController ()
