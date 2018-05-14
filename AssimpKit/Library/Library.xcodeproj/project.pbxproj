@@ -58,6 +58,7 @@
 		77FF141B1F5843360041F4FA /* libIrrXML-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141A1F5843360041F4FA /* libIrrXML-fat.a */; };
 		77FF141F1F58433D0041F4FA /* libIrrXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141E1F58433D0041F4FA /* libIrrXML.a */; };
 		BB1EB46120AA150700E6BA31 /* AssimpKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BB1EB46020AA150700E6BA31 /* AssimpKit.h */; };
+		BB1EB46220AA16E600E6BA31 /* AssimpKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BBE41B7C20A9AA050069C8C6 /* AssimpKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -333,6 +334,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB1EB46220AA16E600E6BA31 /* AssimpKit.h in Headers */,
 				779DF1E81DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch in Headers */,
 				779DF1EB1DDF2A5700DED366 /* SCNAssimpScene.h in Headers */,
 				779DF1E91DDF2A5700DED366 /* SCNAssimpAnimation.h in Headers */,
