@@ -100,7 +100,7 @@ DEPRECATED_MSG_ATTRIBUTE("Please use assimpSceneNamed:postProcessFlags:error:") 
 + (nullable SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
                     postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
 DEPRECATED_MSG_ATTRIBUTE(
-"Please use assimpSceneWithURL:postProcessFlags:error:") NS_SWIFT_UNAVAILABLE("Please use assimpScene(with:postProcessFlags:) throws");
+"Please use assimpSceneWithURL:postProcessFlags:error:") NS_SWIFT_UNAVAILABLE("Please use assimpScene(with:postProcessFlags:) throws") ;
 
 
 /**
@@ -114,7 +114,7 @@ DEPRECATED_MSG_ATTRIBUTE(
 + (nullable SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
                       postProcessFlags:
                           (AssimpKitPostProcessSteps)postProcessFlags
-                                 error:(NSError **)error;
+                                 error:(NSError **)error NS_SWIFT_NAME(assimpScene(url:postProcessFlags:));
 
 @end
 NS_ASSUME_NONNULL_END
