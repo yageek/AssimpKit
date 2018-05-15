@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable SCNAssimpScene *)assimpSceneNamed:(NSString *)name
                     postProcessFlags:
                         (AssimpKitPostProcessSteps)postProcessFlags
-DEPRECATED_MSG_ATTRIBUTE("Please use assimpSceneNamed:postProcessFlags:error:");
+DEPRECATED_MSG_ATTRIBUTE("Please use assimpSceneNamed:postProcessFlags:error:") NS_SWIFT_UNAVAILABLE("Please use assimpScene(named:postProcessFlags:) throws");
 
 /**
  Loads a scene from a file with the specified name in the app’s main bundle.
@@ -88,7 +88,7 @@ DEPRECATED_MSG_ATTRIBUTE("Please use assimpSceneNamed:postProcessFlags:error:");
  */
 + (nullable SCNAssimpScene *)assimpSceneNamed:(NSString *)name
                     postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
-                               error:(NSError **)error;
+                                        error:(NSError **)error NS_SWIFT_NAME(assimpScene(named:postProcessFlags:));
 
 /**
  Loads a scene from the specified NSString URL.
@@ -100,7 +100,7 @@ DEPRECATED_MSG_ATTRIBUTE("Please use assimpSceneNamed:postProcessFlags:error:");
 + (nullable SCNAssimpScene *)assimpSceneWithURL:(NSURL *)url
                     postProcessFlags:(AssimpKitPostProcessSteps)postProcessFlags
 DEPRECATED_MSG_ATTRIBUTE(
-"Please use assimpSceneWithURL:postProcessFlags:error:");
+"Please use assimpSceneWithURL:postProcessFlags:error:") NS_SWIFT_UNAVAILABLE("Please use assimpScene(with:postProcessFlags:) throws");
 
 
 /**
