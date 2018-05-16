@@ -16,3 +16,8 @@ FOUNDATION_EXPORT const unsigned char AssimpKitVersionString[];
 #import <AssimpKit/PostProcessingFlags.h>
 #import <AssimpKit/SCNScene+AssimpImport.h>
 #import <AssimpKit/SCNNode+AssimpImport.h>
+#import <AssimpKit/SCNAssimpScene.h>
+#import <AssimpKit/SCNAssimpAnimation.h>
+#import <AssimpKit/AssimpImporter.h>
+#import <AssimpKit/SCNAssimpAnimSettings.h>
+#import <AssimpKit/SCNTextureInfo.h>
