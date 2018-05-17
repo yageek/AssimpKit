@@ -23,7 +23,7 @@
 		77824E421E1A5B45000B24A3 /* SCNAssimpAnimSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 77824E401E1A5B45000B24A3 /* SCNAssimpAnimSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77824E431E1A5B45000B24A3 /* SCNAssimpAnimSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 77824E411E1A5B45000B24A3 /* SCNAssimpAnimSettings.m */; };
 		779DF1DC1DDF29FF00DED366 /* libassimp-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779DF1DB1DDF29FF00DED366 /* libassimp-fat.a */; };
-		779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		779DF1E61DDF2A5700DED366 /* AssimpImporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DD1DDF2A5700DED366 /* AssimpImporter.h */; };
 		779DF1E71DDF2A5700DED366 /* AssimpImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DF1DE1DDF2A5700DED366 /* AssimpImporter.m */; };
 		779DF1E81DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1DF1DDF2A5700DED366 /* AssimpSceneKit-Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		779DF1E91DDF2A5700DED366 /* SCNAssimpAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 779DF1E01DDF2A5700DED366 /* SCNAssimpAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -53,7 +53,7 @@
 		77EB2B911E17773B004FA171 /* SCNNode+AssimpImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EB2B8F1E17773B004FA171 /* SCNNode+AssimpImport.m */; };
 		77FB462F1F59751300C73D50 /* SCNTextureInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FB462D1F59751300C73D50 /* SCNTextureInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77FB46301F59751300C73D50 /* SCNTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FB462E1F59751300C73D50 /* SCNTextureInfo.m */; };
-		77FB46331F59751900C73D50 /* SCNTextureInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FB46311F59751900C73D50 /* SCNTextureInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77FB46331F59751900C73D50 /* SCNTextureInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FB46311F59751900C73D50 /* SCNTextureInfo.h */; };
 		77FB46341F59751900C73D50 /* SCNTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FB46321F59751900C73D50 /* SCNTextureInfo.m */; };
 		77FF141B1F5843360041F4FA /* libIrrXML-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141A1F5843360041F4FA /* libIrrXML-fat.a */; };
 		77FF141F1F58433D0041F4FA /* libIrrXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FF141E1F58433D0041F4FA /* libIrrXML.a */; };
