@@ -218,10 +218,14 @@
             else {
                 self.applyExternalTexture = true;
                 DLog(@"  tex file name is %@", texFileName);
-                NSString *sceneDir = [[path stringByDeletingLastPathComponent]
-                    stringByAppendingString:@"/"];
-                self.externalTexturePath =
-                    [sceneDir stringByAppendingString:texFileName];
+                NSString *sceneDir = [[[path stringByDeletingLastPathComponent] stringByStandardizingPath] stringByAppendingString:@"/"];
+                NSString *texturePath = [[sceneDir stringByAppendingString:texFilePath] stringByStandardizingPath];
+                // Safety measure: don't allow textures outside of scene folder
+                if (![texturePath hasPrefix:sceneDir])
+                {
+                	texturePath = [sceneDir stringByAppendingString:texFileName];
+                }
+                self.externalTexturePath = texturePath;
                 DLog(@"  tex path is %@", self.externalTexturePath);
                 [self generateCGImageForExternalTextureAtPath:
                           self.externalTexturePath];
@@ -271,7 +275,7 @@
     DLog(@" Generating external texture");
     NSURL *imageURL = [NSURL fileURLWithPath:path];
     self.imageSource = CGImageSourceCreateWithURL((CFURLRef)imageURL, NULL);
-    self.image = CGImageSourceCreateImageAtIndex(self.imageSource, 0, NULL);
+    self.image = self.imageSource ? CGImageSourceCreateImageAtIndex(self.imageSource, 0, NULL) : NULL;
 }
 
 #pragma mark - Extract color

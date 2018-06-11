@@ -727,6 +727,76 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
  */
 
 /**
+  Returns the SceneKit material property based on the assimp texture type
+
+ @param material A SceneKit material
+ @param textureType An Assimp texture type
+ @return the corresponding material property, or nil if there's no equivalent.
+ */
+- (SCNMaterialProperty *)materialProperty:(SCNMaterial *)material withTextureType:(enum aiTextureType)textureType
+{
+	switch (textureType)
+	{
+		case aiTextureType_DIFFUSE:
+		{
+			return material.diffuse;
+		}
+		case aiTextureType_SPECULAR:
+		{
+			return material.specular;
+		}
+		case aiTextureType_AMBIENT:
+		{
+			return material.ambient;
+		}
+		case aiTextureType_REFLECTION:
+		{
+			return material.reflective;
+		}
+		case aiTextureType_EMISSIVE:
+		{
+			return material.emission;
+		}
+		case aiTextureType_OPACITY:
+		{
+			return material.transparent;
+		}
+		case aiTextureType_NORMALS:
+		{
+			return material.normal;
+		}
+		case aiTextureType_DISPLACEMENT:
+		{
+			if (@available(iOS 11.0, *))
+			{
+				return material.displacement;
+			}
+			else
+			{
+				return nil;
+			}
+		}
+		case aiTextureType_LIGHTMAP:
+		{
+			return material.ambientOcclusion;
+		}
+		case aiTextureType_SHININESS:
+		case aiTextureType_HEIGHT:
+		{
+			// No equivalent in SceneKit
+			return nil;
+		}
+		case aiTextureType_NONE:
+		case aiTextureType_UNKNOWN:
+		default:
+		{
+			return nil;
+		}
+	}
+}
+
+
+/**
  Updates a scenekit material property with the texture file path or the color
  if no texture is specifed.
 
@@ -740,86 +810,17 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                         withSCNMaterial:(SCNMaterial *)material
                                  atPath:(NSString *)path
 {
-    NSString *channel = @".mappingChannel";
-    NSString *wrapS = @".wrapS";
-    NSString *wrapT = @".wrapS";
-    NSString *intensity = @".intensity";
-    NSString *minFilter = @".minificationFilter";
-    NSString *magFilter = @".magnificationFilter";
-
-    NSString *keyPrefix = @"";
-    if (textureInfo.textureType == aiTextureType_DIFFUSE)
-    {
-        material.diffuse.contents = [textureInfo getMaterialPropertyContents];
-        keyPrefix = @"diffuse";
-    }
-    else if (textureInfo.textureType == aiTextureType_SPECULAR)
-    {
-        material.specular.contents = [textureInfo getMaterialPropertyContents];
-        keyPrefix = @"specular";
-    }
-    else if (textureInfo.textureType == aiTextureType_AMBIENT)
-    {
-        material.ambient.contents = [textureInfo getMaterialPropertyContents];
-        keyPrefix = @"ambient";
-    }
-    else if (textureInfo.textureType == aiTextureType_REFLECTION)
-    {
-        material.reflective.contents =
-            [textureInfo getMaterialPropertyContents];
-        keyPrefix = @"reflective";
-    }
-    else if (textureInfo.textureType == aiTextureType_EMISSIVE)
-    {
-        material.emission.contents = [textureInfo getMaterialPropertyContents];
-        keyPrefix = @"emissive";
-    }
-    else if (textureInfo.textureType == aiTextureType_OPACITY)
-    {
-        material.transparent.contents =
-        [textureInfo getMaterialPropertyContents];
-        keyPrefix = @"transparent";
-    }
-    else if (textureInfo.textureType == aiTextureType_NORMALS)
-    {
-        material.normal.contents = [textureInfo getMaterialPropertyContents];
-        keyPrefix = @"normal";
-    }
-    else if (textureInfo.textureType == aiTextureType_HEIGHT)
-    {
-        material.normal.contents = [textureInfo getMaterialPropertyContents];
-        keyPrefix = @"normal";
-    }
-    else if (textureInfo.textureType == aiTextureType_DISPLACEMENT)
-    {
-        material.normal.contents = [textureInfo getMaterialPropertyContents];
-        keyPrefix = @"normal";
-    }
-    else if (textureInfo.textureType == aiTextureType_LIGHTMAP)
-    {
-        material.ambientOcclusion.contents =
-            [textureInfo getMaterialPropertyContents];
-        keyPrefix = @"ambientOcclusion";
-    }
-
-    // Update the keys
-    channel = [keyPrefix stringByAppendingString:channel];
-    wrapS = [keyPrefix stringByAppendingString:wrapS];
-    wrapT = [keyPrefix stringByAppendingString:wrapT];
-    intensity = [keyPrefix stringByAppendingString:intensity];
-    minFilter = [keyPrefix stringByAppendingString:minFilter];
-    magFilter = [keyPrefix stringByAppendingString:magFilter];
-
-    [material setValue:0 forKey:channel];
-    [material setValue:[NSNumber numberWithInt:SCNWrapModeRepeat]
-                forKey:wrapS];
-    [material setValue:[NSNumber numberWithInt:SCNWrapModeRepeat]
-                forKey:wrapT];
-    [material setValue:[NSNumber numberWithInt:1] forKey:intensity];
-    [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
-                forKey:minFilter];
-    [material setValue:[NSNumber numberWithInt:SCNFilterModeLinear]
-                forKey:magFilter];
+	SCNMaterialProperty * materialProperty = [self materialProperty:material withTextureType:textureInfo.textureType];
+	if (materialProperty)
+	{
+		materialProperty.contents = [textureInfo getMaterialPropertyContents];
+		materialProperty.mappingChannel = 0;
+		materialProperty.wrapS = SCNWrapModeRepeat;
+		materialProperty.wrapT = SCNWrapModeRepeat;
+		materialProperty.intensity = 1.0;
+		materialProperty.minificationFilter = SCNFilterModeLinear;
+		materialProperty.magnificationFilter = SCNFilterModeLinear;
+	}
 }
 
 /**
