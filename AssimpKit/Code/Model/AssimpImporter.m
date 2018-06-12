@@ -920,30 +920,44 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                withSCNMaterial:material];
         DLog(@"+++ Loading blend mode");
         unsigned int blendMode = 0;
-        unsigned int *max;
-        aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC,
-                                  (int *)&blendMode, max);
-        if (blendMode == aiBlendMode_Default)
+        aiReturn blendModeResult = aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC,
+                                  (int *)&blendMode, NULL);
+        if (blendModeResult == AI_SUCCESS)
         {
-            DLog(@" Using alpha blend mode");
-            material.blendMode = SCNBlendModeAlpha;
-        }
-        else if (blendMode == aiBlendMode_Additive)
-        {
-            DLog(@" Using add blend mode");
-            material.blendMode = SCNBlendModeAdd;
-        }
+			if (blendMode == aiBlendMode_Default)
+			{
+				DLog(@" Using alpha blend mode");
+				material.blendMode = SCNBlendModeAlpha;
+			}
+			else if (blendMode == aiBlendMode_Additive)
+			{
+				DLog(@" Using add blend mode");
+				material.blendMode = SCNBlendModeAdd;
+			}
+		}
+		
         DLog(@"+++ Loading cull/double sided mode");
-        /**
-     FIXME: The cull mode works only on iOS. Not on OSX.
-     Hence has been defaulted to Cull Back.
-     USE AI_MATKEY_TWOSIDED to get the cull mode.
-     */
+        
+        // SceneKit only allows for either backside culling or frontside culling,
+        // but doubleSided allows for the material to be applied on both sides.
         material.cullMode = SCNCullBack;
+        
+        int twoSided = 0;
+        material.doubleSided = (aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_TWOSIDED, (int *)&twoSided, NULL) == AI_SUCCESS && twoSided != 0);
+        
         DLog(@"+++ Loading shininess");
-        int shininess;
-        aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC,
-                                  (int *)&shininess, max);
+        float shininess = 0.0, shininessStrength;
+        aiReturn shininessResult = aiGetMaterialFloatArray(aiMaterial, AI_MATKEY_SHININESS, (float *)&shininess, NULL);
+        aiReturn shininessStrengthResult = aiGetMaterialFloatArray(aiMaterial, AI_MATKEY_SHININESS_STRENGTH, (float *)&shininessStrength, NULL);
+        if (shininessResult == AI_SUCCESS && shininessStrengthResult == AI_SUCCESS)
+        {
+        	material.shininess = shininess * shininessStrength;
+        }
+        else
+        {
+        	material.shininess = 0.0;
+        }
+        
         DLog(@"   shininess: %d", shininess);
             //material.shininess = shininess;
         DLog(@"+++ Loading shading model");
