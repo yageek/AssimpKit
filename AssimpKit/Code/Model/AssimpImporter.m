@@ -933,13 +933,17 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
             DLog(@" Using add blend mode");
             material.blendMode = SCNBlendModeAdd;
         }
+        
         DLog(@"+++ Loading cull/double sided mode");
-        /**
-     FIXME: The cull mode works only on iOS. Not on OSX.
-     Hence has been defaulted to Cull Back.
-     USE AI_MATKEY_TWOSIDED to get the cull mode.
-     */
+        
+        // SceneKit only allows for either backside culling or frontside culling,
+        // but doubleSided allows for the material to be applied on both sides.
         material.cullMode = SCNCullBack;
+        
+        int twoSided = 0;
+        material.doubleSided = (aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_TWOSIDED, (int *)&twoSided, NULL) == AI_SUCCESS && twoSided != 0);
+        
+        
         DLog(@"+++ Loading shininess");
         int shininess;
         aiGetMaterialIntegerArray(aiMaterial, AI_MATKEY_BLEND_FUNC,
