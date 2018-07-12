@@ -5,7 +5,6 @@
 //  Created by The Almighty Dwayne Coussement on 12/07/2018.
 //
 
-@import UIKit;
 #import "AssimpImageCache.h"
 
 @interface AssimpImageCache()
@@ -25,13 +24,13 @@
 
 - (nullable CGImageRef)cachedFileAtPath:(NSString *)path
 {
-	UIImage *image = self.cacheDictionary[path];
-	return image.CGImage;
+	id image = self.cacheDictionary[path];
+	return (__bridge CGImageRef _Nullable)(image);
 }
 
 - (void)storeImage:(CGImageRef)image toPath:(NSString *)path
 {
-	[self.cacheDictionary setObject:[UIImage imageWithCGImage:image] forKey:path];
+	[self.cacheDictionary setObject:(__bridge id _Nonnull)(image) forKey:path];
 }
 
 @end
