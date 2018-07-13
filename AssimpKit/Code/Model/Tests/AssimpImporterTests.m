@@ -349,7 +349,8 @@
                        modelPath:modelPath
                          testLog:testLog];
     }
-    for (int i = 0; i < aiNode->mNumChildren; i++)
+	NSInteger nodeCount = MIN(aiNode->mNumChildren, sceneNode.childNodes.count);
+    for (int i = 0; i < nodeCount; i++)
     {
         const struct aiNode *aiChildNode = aiNode->mChildren[i];
         SCNNode *sceneChildNode = [sceneNode.childNodes objectAtIndex:i];

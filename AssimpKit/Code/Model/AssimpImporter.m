@@ -242,8 +242,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 {
     SCNNode *node = [[SCNNode alloc] init];
     const struct aiString *aiNodeName = &aiNode->mName;
-    node.name = [NSString stringWithUTF8String:aiNodeName->data];
-    DLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
+	node.name = [NSString stringWithUTF8String:aiNodeName->data];
+	DLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
     int nVertices = [self findNumVerticesInNode:aiNode inScene:aiScene];
     DLog(@" N VERTICES: %@", nVertices);
     if (nVertices > 0)
@@ -281,11 +281,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     for (int i = 0; i < aiNode->mNumChildren; i++)
     {
         const struct aiNode *aiChildNode = aiNode->mChildren[i];
-        SCNNode *childNode = [self makeSCNNodeFromAssimpNode:aiChildNode
-                                                     inScene:aiScene
-                                                      atPath:path
-												  imageCache:imageCache];
-        [node addChildNode:childNode];
+		if (aiChildNode != NULL)
+		{
+			SCNNode *childNode = [self makeSCNNodeFromAssimpNode:aiChildNode
+														 inScene:aiScene
+														  atPath:path
+													  imageCache:imageCache];
+			[node addChildNode:childNode];
+		}
     }
     return node;
 }
@@ -1716,9 +1719,12 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
     for (int i = 0; i < aiNode->mNumChildren; i++)
     {
         const struct aiNode *aiChildNode = aiNode->mChildren[i];
-        [self makeSkinnerForAssimpNode:aiChildNode
-                               inScene:aiScene
-                              scnScene:scene];
+		if (aiChildNode != NULL)
+		{
+			[self makeSkinnerForAssimpNode:aiChildNode
+								   inScene:aiScene
+								  scnScene:scene];
+		}
     }
 }
 
