@@ -283,10 +283,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         const struct aiNode *aiChildNode = aiNode->mChildren[i];
 		if (aiChildNode != NULL)
 		{
-			SCNNode *childNode = [self makeSCNNodeFromAssimpNode:aiChildNode
-														 inScene:aiScene
-														  atPath:path
-													  imageCache:imageCache];
+            SCNNode *childNode = [self makeSCNNodeFromAssimpNode:aiChildNode
+                                                         inScene:aiScene
+                                                          atPath:path
+                                                      imageCache:imageCache];
 			[node addChildNode:childNode];
 		}
     }
@@ -1719,12 +1719,12 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
     for (int i = 0; i < aiNode->mNumChildren; i++)
     {
         const struct aiNode *aiChildNode = aiNode->mChildren[i];
-		if (aiChildNode != NULL)
-		{
-			[self makeSkinnerForAssimpNode:aiChildNode
-								   inScene:aiScene
-								  scnScene:scene];
-		}
+        if (aiChildNode != NULL)
+        {
+            [self makeSkinnerForAssimpNode:aiChildNode
+                                   inScene:aiScene
+                                  scnScene:scene];
+        }
     }
 }
 
