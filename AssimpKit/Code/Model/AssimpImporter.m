@@ -245,7 +245,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	node.name = [NSString stringWithUTF8String:aiNodeName->data];
 	DLog(@" Creating node %@ with %d meshes", node.name, aiNode->mNumMeshes);
     int nVertices = [self findNumVerticesInNode:aiNode inScene:aiScene];
-    DLog(@" N VERTICES: %@", nVertices);
+    DLog(@" N VERTICES: %@", @(nVertices));
     if (nVertices > 0)
     {
         node.geometry = [self makeSCNGeometryFromAssimpNode:aiNode
