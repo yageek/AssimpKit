@@ -345,6 +345,16 @@
     if(aiTextureType == aiTextureType_OPACITY) {
         matColor =
         aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_TRANSPARENT, &color);
+        
+        if (matColor != AI_SUCCESS)
+        {
+            float opacity = 0.0;
+            matColor = aiGetMaterialFloatArray(aiMaterial, AI_MATKEY_OPACITY, &opacity, NULL);
+            color.r = 1.0;
+            color.g = 1.0;
+            color.b = 1.0;
+            color.a = opacity;
+        }
     }
     if (AI_SUCCESS == matColor)
     {
