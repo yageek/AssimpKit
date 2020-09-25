@@ -13,7 +13,7 @@ let package = Package(
 		.binaryTarget(
 			name: "AssimpKit",
 			url: "https://github.com/showpad/AssimpKit/releases/download/1.2.1/AssimpKit.xcframework.zip",
-			checksum: "bfb412ada4d291e22542c2d06b3e9f811616fb043fbd12660b0108541eb33a3c"
+			checksum: "5a0049328c0aea7d1a303520f81197db4cb811ebcebb7d04bb0fb2262b7bf258"
 		),
 	]
 )
