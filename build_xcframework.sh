@@ -13,7 +13,8 @@ CATALYST_ARCHIVE="$OUTPUT_FOLDER/AssimpKit.framework-catalyst.xcarchive"
 XCFRAMEWORK_NAME="AssimpKit.xcframework"
 XCFRAMEWORK_PATH="$OUTPUT_FOLDER/$XCFRAMEWORK_NAME"
 
-ARCHIVE_SUBPATH="Products/Library/Frameworks/AssimpKit.framework"
+FRAMEWORK_SUBPATH="Products/Library/Frameworks/AssimpKit.framework"
+DSYM_SUBPATH="dSYMs/AssimpKit.framework.dSYM"
 
 
 rm -rf "$OUTPUT_FOLDER"
@@ -30,8 +31,16 @@ xcodebuild archive -workspace "$WORKSPACE" -scheme 'AssimpKit-iOS' -configuratio
 # Mac Catalyst slice.
 xcodebuild archive -workspace "$WORKSPACE" -scheme 'AssimpKit-macOS' -configuration Release -destination 'platform=macOS,arch=x86_64' -archivePath "$CATALYST_ARCHIVE" SKIP_INSTALL=NO
 
+
 # Create the XCFramework
-xcodebuild -create-xcframework -framework "$DEVICE_ARCHIVE/$ARCHIVE_SUBPATH" -framework "$SIMULATOR_ARCHIVE/$ARCHIVE_SUBPATH" -framework "$CATALYST_ARCHIVE/$ARCHIVE_SUBPATH" -output "$XCFRAMEWORK_PATH"
+xcodebuild -create-xcframework \
+	-framework "$DEVICE_ARCHIVE/$FRAMEWORK_SUBPATH" \
+	-debug-symbols "$PWD/$DEVICE_ARCHIVE/$DSYM_SUBPATH" \
+	-framework "$SIMULATOR_ARCHIVE/$FRAMEWORK_SUBPATH" \
+	-debug-symbols "$PWD/$SIMULATOR_ARCHIVE/$DSYM_SUBPATH" \
+	-framework "$CATALYST_ARCHIVE/$FRAMEWORK_SUBPATH" \
+	-debug-symbols "$PWD/$CATALYST_ARCHIVE/$DSYM_SUBPATH" \
+	-output "$XCFRAMEWORK_PATH"
 
 
 
