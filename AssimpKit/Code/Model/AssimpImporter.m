@@ -43,6 +43,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "assimp/postprocess.h" // Post processing flags
 #include "assimp/scene.h"       // Output data structure
 
+// Used for indices in geometries. This used to be "short", which wasn't enough for larger models.
+typedef unsigned int AssimpKitIndex;
+
+
 @interface AssimpImporter ()
 
 #pragma mark - Bone data
@@ -665,12 +669,12 @@ makeColorGeometrySourceForNode:(const struct aiNode *)aiNode
 makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
                                 inNode:(const struct aiNode *)aiNode
                                inScene:(const struct aiScene *)aiScene
-                       withIndexOffset:(short)indexOffset
+                       withIndexOffset:(AssimpKitIndex)indexOffset
                                 nFaces:(int)nFaces
 {
     int indicesCounter = 0;
     int nIndices = [self findNumIndicesInMesh:aiMeshIndex inScene:aiScene];
-    short *scnIndices =(short *)malloc(nIndices * sizeof(short));
+    AssimpKitIndex *scnIndices =(AssimpKitIndex *)malloc(nIndices * sizeof(AssimpKitIndex));
     const struct aiMesh *aiMesh = aiScene->mMeshes[aiMeshIndex];
     for (int i = 0; i < aiMesh->mNumFaces; i++)
     {
@@ -682,16 +686,16 @@ makeIndicesGeometryElementForMeshIndex:(int)aiMeshIndex
         for (int j = 0; j < aiFace->mNumIndices; j++)
         {
             scnIndices[indicesCounter++] =
-                (short)indexOffset + (short)aiFace->mIndices[j];
+                (AssimpKitIndex)indexOffset + (AssimpKitIndex)aiFace->mIndices[j];
         }
     }
     NSData *indicesData =
-        [NSData dataWithBytes:scnIndices length:nIndices * sizeof(short)];
+        [NSData dataWithBytes:scnIndices length:nIndices * sizeof(AssimpKitIndex)];
     SCNGeometryElement *indices = [SCNGeometryElement
         geometryElementWithData:indicesData
                   primitiveType:SCNGeometryPrimitiveTypeTriangles
                  primitiveCount:nFaces
-                  bytesPerIndex:sizeof(short)];
+                  bytesPerIndex:sizeof(AssimpKitIndex)];
     free(scnIndices);
     return indices;
 }
@@ -1563,7 +1567,7 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
                           boneNames:(NSArray *)boneNames
 {
     DLog(@" |--| Making bone indices geometry source: %@", boneNames);
-    short nodeGeometryBoneIndices[nVertices * maxWeights];
+    AssimpKitIndex nodeGeometryBoneIndices[nVertices * maxWeights];
     int indexCounter = 0;
 
     for (int i = 0; i < aiNode->mNumMeshes; i++)
@@ -1612,8 +1616,8 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
             for (NSNumber *boneIndex in boneIndices)
             {
                 nodeGeometryBoneIndices[indexCounter++] =
-                    [boneIndex shortValue];
-                // DLog(@"  adding bone index: %d", boneIndex.shortValue);
+                    [boneIndex unsignedIntValue];
+                // DLog(@"  adding bone index: %d", boneIndex.unsignedIntValue);
             }
             for (int k = 0; k < zeroIndices; k++)
             {
@@ -1627,14 +1631,14 @@ makeBoneIndicesGeometrySourceAtNode:(const struct aiNode *)aiNode
     SCNGeometrySource *boneIndicesSource = [SCNGeometrySource
         geometrySourceWithData:[NSData dataWithBytes:nodeGeometryBoneIndices
                                               length:nVertices * maxWeights *
-                                                     sizeof(short)]
+                                                     sizeof(AssimpKitIndex)]
                       semantic:SCNGeometrySourceSemanticBoneIndices
                    vectorCount:nVertices
                floatComponents:NO
            componentsPerVector:maxWeights
-             bytesPerComponent:sizeof(short)
+             bytesPerComponent:sizeof(AssimpKitIndex)
                     dataOffset:0
-                    dataStride:maxWeights * sizeof(short)];
+                    dataStride:maxWeights * sizeof(AssimpKitIndex)];
     return boneIndicesSource;
 }
 
