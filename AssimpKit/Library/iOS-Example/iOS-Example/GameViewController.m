@@ -70,7 +70,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
             NSString *key = [animationKeys objectAtIndex:0];
             SCNAnimationEventBlock eventBlock =
-                ^(CAAnimation *animation, id animatedObject,
+                ^(id<SCNAnimation> animation, id animatedObject,
                   BOOL playingBackward) {
                   NSLog(@" Animation Event triggered ");
 
