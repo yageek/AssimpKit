@@ -17,8 +17,8 @@ let package = Package(
 	targets: [
 		.binaryTarget(
 			name: "AssimpKit",
-			url: "https://github.com/showpad/AssimpKit/releases/download/1.3.1/AssimpKit.xcframework.zip",
-			checksum: "68ed4708dcb19011d06bcd6bbfa47c3f53dc2af0beb236d546397f372baf7727"
+			url: "https://github.com/showpad/AssimpKit/releases/download/1.3.3/AssimpKit.xcframework.zip",
+			checksum: "8107773438568f2f864f5c08ceb2ce2efae95cf8b67eb3cdc2df7a61aea54c26"
 		),
 		
 		// Needed to create a dynamic target that contains the statically linked AssimpKit
